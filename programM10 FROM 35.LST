@@ -1,0 +1,717 @@
+SQL> --35--
+SQL> SELECT SAL*12
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER';
+
+    SAL*12                                                                      
+----------                                                                      
+     35700                                                                      
+     34200                                                                      
+     29400                                                                      
+
+SQL> -- 36--
+SQL> --37--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB ENAME LIKE '__%';
+WHERE JOB ENAME LIKE '__%'
+          *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE JOB  LIKE '__E%'
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        20                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+SQL> SET PAGES 200 LINE 200
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+SQL> --38--
+SQL> SELECT
+  2  FROM EMP
+  3  WHERE COMM IS NULL AND SAL>1000;
+FROM EMP
+*
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT
+  2  FROM EMP
+  3* WHERE COMM IS NULL AND SAL>1000
+SQL> /
+FROM EMP
+*
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE COMM IS NULL AND SAL>1000
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+8 rows selected.
+
+SQL> --39--
+SQL> SELECT *
+  2  FROM EMP
+  3  
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DNAME LIKE '%L%L%';
+WHERE DNAME LIKE '%L%L%'
+      *
+ERROR at line 3:
+ORA-00904: "DNAME": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM DEPT
+  3* WHERE DNAME LIKE '%L%L%'
+SQL> /
+
+no rows selected
+
+SQL> SELECT *
+  2  FROM DEPT;
+
+    DEPTNO DNAME          LOC                                                                                                                                                                           
+---------- -------------- -------------                                                                                                                                                                 
+        10 ACCOUNTING     NEW YORK                                                                                                                                                                      
+        20 RESEARCH       DALLAS                                                                                                                                                                        
+        30 SALES          CHICAGO                                                                                                                                                                       
+        40 OPERATIONS     BOSTON                                                                                                                                                                        
+
+SQL> --40--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO NOT IN 20 AND ENAME NOT LIKE '%M';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+9 rows selected.
+
+SQL> --41--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE EMPNO BETWEEN 7001 AND 7999;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+14 rows selected.
+
+SQL> -- 42--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL NOT BETWEEN 1501 AND 2999;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+10 rows selected.
+
+SQL> --43 NHI BNA--
+SQL> SELECT *
+  2  FROM EMP
+  3  
+SQL> --44--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB = 'CLERK' AND ENAME LIKE '%S' AND DEPTNO !=10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+
+SQL> --46--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE LENTH(ENAME) = 5;
+WHERE LENTH(ENAME) = 5
+      *
+ERROR at line 3:
+ORA-00904: "LENTH": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE LENGTH(ENAME) = 5
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+
+8 rows selected.
+
+SQL> -- 47--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL>COMM;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+
+SQL> SELECT ENAME || SAL || DEPTNO ||
+  2  FROM EMP;
+FROM EMP
+*
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME || SAL || DEPTNO ||
+  2* FROM EMP
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT (ENAME , SAL, DEPTNO)
+  2* FROM EMP
+SQL> /
+SELECT (ENAME , SAL, DEPTNO)
+              *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> -- 49--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE '__A%' AND ENAME LIKE '%R';
+
+no rows selected
+
+SQL> -- 50--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL>300 AND SAL<=3000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+13 rows selected.
+
+SQL> SELECT
+  2  FROM ANALYST;
+FROM ANALYST
+*
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB = 'ANALYST';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE COMM IS NULL;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                                                   
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+10 rows selected.
+
+SQL> --53--
+SQL> SELECT *
+  2  FROM EMP
+  3  
+SQL> --54--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE EMPNO BETWEEN 78 AND 79 AND JOB LIKE '%E%' AND DEPTNO IN(20,30);
+
+no rows selected
+
+SQL> --55--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO IN(30,20) AND HIREDATE BETWEEN '02-JAN-81' AND '09-JUNE-81';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                                                   
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB AND HIREDATE LIKE
+  4  
+SQL> SELECT * JOB,HIREDATE
+  2  FROM EMP
+  3  WHERE ENAME BETWEEN A AND S AND DEPTNO IN(10,20);
+SELECT * JOB,HIREDATE
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT  JOB,HIREDATE
+  2  FROM EMP
+  3* WHERE ENAME BETWEEN A AND S AND DEPTNO IN(10,20)
+SQL> /
+WHERE ENAME BETWEEN A AND S AND DEPTNO IN(10,20)
+                          *
+ERROR at line 3:
+ORA-00904: "S": invalid identifier 
+
+
+SQL> -- 56 NHI BNA--
+SQL> SELECT DNAME
+  2  FROM DEPT
+  3  WHERE DNAME LIKE '%S%S' AND LOCATION LIKE '%O%' OR '%A%';
+WHERE DNAME LIKE '%S%S' AND LOCATION LIKE '%O%' OR '%A%'
+                                                       *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> -- 58--
+SQL> SELECT
+  2  
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER' AND DEPTNO IN (20,30) AND HIREDATE BETWEEN '02-JAN-81 AND '09-JUNE-81';
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE JOB ='MANAGER' AND DEPTNO IN (20,30) AND HIREDATE BETWEEN '02-JAN-81' AND '09-JUNE-81'
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+
+SQL> -- 50--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE EMPNO BETWEEN 78 AND 79 AND JOB LIKE '%E%' AND DEPTNO IN (20,30);
+
+no rows selected
+
+SQL> --60--
+SQL> SELECT JOB ,HIREDATE
+  2  FROM EMP
+  3  WHERE ENAME BETWEEN 'A' AND 'S' AND DEPTNO IN(20,30);
+
+JOB       HIREDATE                                                                                                                                                                                      
+--------- ---------                                                                                                                                                                                     
+SALESMAN  20-FEB-81                                                                                                                                                                                     
+MANAGER   02-APR-81                                                                                                                                                                                     
+SALESMAN  28-SEP-81                                                                                                                                                                                     
+MANAGER   01-MAY-81                                                                                                                                                                                     
+CLERK     23-MAY-87                                                                                                                                                                                     
+CLERK     03-DEC-81                                                                                                                                                                                     
+ANALYST   03-DEC-81                                                                                                                                                                                     
+
+7 rows selected.
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT JOB ,HIREDATE,COMM
+  2  FROM EMP
+  3* WHERE ENAME BETWEEN 'A' AND 'S' AND DEPTNO IN(20,30)
+SQL> /
+
+JOB       HIREDATE        COMM                                                                                                                                                                          
+--------- --------- ----------                                                                                                                                                                          
+SALESMAN  20-FEB-81        300                                                                                                                                                                          
+MANAGER   02-APR-81                                                                                                                                                                                     
+SALESMAN  28-SEP-81       1400                                                                                                                                                                          
+MANAGER   01-MAY-81                                                                                                                                                                                     
+CLERK     23-MAY-87                                                                                                                                                                                     
+CLERK     03-DEC-81                                                                                                                                                                                     
+ANALYST   03-DEC-81                                                                                                                                                                                     
+
+7 rows selected.
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME
+  4  
+SQL> SELECT *
+  2  FROM DEPT
+  3  WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' AND '%A%';
+WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' AND '%A%'
+                                                       *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT NAME 
+  2  FROM DEPT
+  3* WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR '%A%'
+SQL> /
+WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR '%A%'
+                                                      *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> SELECT *
+  2  FROM DEPT
+  3  WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR '%A%';
+WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR '%A%'
+                                                      *
+ERROR at line 3:
+ORA-00920: invalid relational operator 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM DEPT
+  3* WHERE NAME LIKE '%S%' AND LOCATION LIKE '%O%' OR LOCATION LIKE '%A%'
+SQL> /
+WHERE NAME LIKE '%S%' AND LOCATION LIKE '%O%' OR LOCATION LIKE '%A%'
+                                                 *
+ERROR at line 3:
+ORA-00904: "LOCATION": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM DEPT
+  3* WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR LOCATION LIKE '%A%'
+SQL> /
+WHERE DNAME LIKE '%S%' AND LOCATION LIKE '%O%' OR LOCATION LIKE '%A%'
+                                                  *
+ERROR at line 3:
+ORA-00904: "LOCATION": invalid identifier 
+
+
+SQL> SELECT *
+  2  FROM
+  3  --67--
+  4  --66 YE DONO NHI BNA--
+  5  
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL<500 AND DEPTNO =20;
+
+no rows selected
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE DEPTNO =10;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER' AND DEPTNO =30;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL>3000;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE JOB = 'ANALYST';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> --72--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 2001 AND 2999 AND DEPTNO NOT IN(10,20) AND JOB = 'CLERK';
+
+no rows selected
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%E';
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                   
+
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE
+  4  
+SQL> SELECT COMM
+  2  FROM EMP
+  3  WHERE DEPTNO =30;
+
+      COMM                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       300                                                                                                                                                                                              
+       500                                                                                                                                                                                              
+      1400                                                                                                                                                                                              
+                                                                                                                                                                                                        
+         0                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+6 rows selected.
+
+SQL> -- 75--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 2501 AND 4999 AND DEPTNO IN (10,20
+  4  
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL BETWEEN 2501 AND 4999 AND DEPTNO IN(10,20);
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                   
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                   
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                                                   
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                                                   
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                   
+
+SQL> --77--
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MANGER NOT IN AND DEPTNO=20;
+WHERE MANGER NOT IN AND DEPTNO=20
+                    *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE MANGER IS NULL AND DEPTNO=20
+SQL> /
+WHERE MANGER IS NULL AND DEPTNO=20
+      *
+ERROR at line 3:
+ORA-00904: "MANGER": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE JOB IS NULL = 'MANAGER'  AND DEPTNO=20
+SQL> /
+WHERE JOB IS NULL = 'MANAGER'  AND DEPTNO=20
+                  *
+ERROR at line 3:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE  IS NULL MANAGER AND DEPTNO=20
+SQL> /
+WHERE  IS NULL MANAGER AND DEPTNO=20
+       *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> -- 77 78 --
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE SAL< BETWEEN 1001 AND 2000;
+WHERE SAL< BETWEEN 1001 AND 2000
+           *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT *
+  2  FROM SALGRADES
+  3  WHERE LOWERSAL BETWEEN 1000 AND 2000;
+FROM SALGRADES
+     *
+ERROR at line 2:
+ORA-00942: table or view does not exist 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT *
+  2  FROM EMP
+  3* WHERE LOWERSAL BETWEEN 1000 AND 2000
+SQL> /
+WHERE LOWERSAL BETWEEN 1000 AND 2000
+      *
+ERROR at line 3:
+ORA-00904: "LOWERSAL": invalid identifier 
+
+
+SQL> SPOOL OFF

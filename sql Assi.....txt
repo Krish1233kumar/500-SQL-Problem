@@ -1,0 +1,345 @@
+
+ENAME          SAL*12
+---------- ----------
+SMITH            9600
+ALLEN           19200
+WARD            15000
+JONES           35700
+MARTIN          15000
+BLAKE           34200
+CLARK           29400
+SCOTT           36000
+KING            60000
+TURNER          18000
+ADAMS           13200
+
+ENAME          SAL*12
+---------- ----------
+JAMES           11400
+FORD            36000
+MILLER          15600
+
+14 rows selected.
+
+SQL> SELECT ENAME,JOB,SAL*6
+  2  FROM EMP;
+
+ENAME      JOB            SAL*6
+---------- --------- ----------
+SMITH      CLERK           4800
+ALLEN      SALESMAN        9600
+WARD       SALESMAN        7500
+JONES      MANAGER        17850
+MARTIN     SALESMAN        7500
+BLAKE      MANAGER        17100
+CLARK      MANAGER        14700
+SCOTT      ANALYST        18000
+KING       PRESIDENT      30000
+TURNER     SALESMAN        9000
+ADAMS      CLERK           6600
+
+ENAME      JOB            SAL*6
+---------- --------- ----------
+JAMES      CLERK           5700
+FORD       ANALYST        18000
+MILLER     CLERK           7800
+
+14 rows selected.
+
+SQL> SELECT EMP.*,(SAL*)+2000
+  2  FROM EMP;
+SELECT EMP.*,(SAL*)+2000
+                  *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> EDIT
+Wrote file afiedt.buf
+
+  1  SELECT EMP.*,(SAL*12)+2000
+  2* FROM EMP
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO (SAL*12)+2000
+---------- -------------
+      7369 SMITH      CLERK           7902 17-DEC-80        800
+        20         11600
+
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300
+        30         21200
+
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500
+        30         17000
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO (SAL*12)+2000
+---------- -------------
+      7566 JONES      MANAGER         7839 02-APR-81       2975
+        20         37700
+
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400
+        30         17000
+
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850
+        30         36200
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO (SAL*12)+2000
+---------- -------------
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450
+        10         31400
+
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000
+        20         38000
+
+      7839 KING       PRESIDENT            17-NOV-81       5000
+        10         62000
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO (SAL*12)+2000
+---------- -------------
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0
+        30         20000
+
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100
+        20         15200
+
+      7900 JAMES      CLERK           7698 03-DEC-81        950
+        30         13400
+
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM
+---------- ---------- --------- ---------- --------- ---------- ----------
+    DEPTNO (SAL*12)+2000
+---------- -------------
+      7902 FORD       ANALYST         7566 03-DEC-81       3000
+        20         38000
+
+      7934 MILLER     CLERK           7782 23-JAN-82       1300
+        10         17600
+
+
+14 rows selected.
+
+SQL> SET PAGES 200 LINE 200
+SQL> /
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO (SAL*12)+2000
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- -------------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20         11600
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30         21200
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30         17000
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20         37700
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30         17000
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30         36200
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10         31400
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20         38000
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10         62000
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30         20000
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20         15200
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30         13400
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20         38000
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10         17600
+
+14 rows selected.
+
+SQL> SELECT ENAME,SAL,(SAL*40)/100
+  2  FROM EMP;
+
+ENAME             SAL (SAL*40)/100
+---------- ---------- ------------
+SMITH             800          320
+ALLEN            1600          640
+WARD             1250          500
+JONES            2975         1190
+MARTIN           1250          500
+BLAKE            2850         1140
+CLARK            2450          980
+SCOTT            3000         1200
+KING             5000         2000
+TURNER           1500          600
+ADAMS            1100          440
+JAMES             950          380
+FORD             3000         1200
+MILLER           1300          520
+
+14 rows selected.
+
+SQL> SELECT SAL,(SAL+COMM)
+  2  FROM EMP;
+
+       SAL (SAL+COMM)
+---------- ----------
+       800
+      1600       1900
+      1250       1750
+      2975
+      1250       2650
+      2850
+      2450
+      3000
+      5000
+      1500       1500
+      1100
+       950
+      3000
+      1300
+
+14 rows selected.
+
+SQL> SELECT ENAME,SAL,-(SAL*40)/100
+  2  FROM EMP;
+
+ENAME             SAL -(SAL*40)/100
+---------- ---------- -------------
+SMITH             800          -320
+ALLEN            1600          -640
+WARD             1250          -500
+JONES            2975         -1190
+MARTIN           1250          -500
+BLAKE            2850         -1140
+CLARK            2450          -980
+SCOTT            3000         -1200
+KING             5000         -2000
+TURNER           1500          -600
+ADAMS            1100          -440
+JAMES             950          -380
+FORD             3000         -1200
+MILLER           1300          -520
+
+14 rows selected.
+
+SQL> SELECT ENAME,SAL,(SAL*1)+50
+  2  FROM EMP;
+
+ENAME             SAL (SAL*1)+50
+---------- ---------- ----------
+SMITH             800        850
+ALLEN            1600       1650
+WARD             1250       1300
+JONES            2975       3025
+MARTIN           1250       1300
+BLAKE            2850       2900
+CLARK            2450       2500
+SCOTT            3000       3050
+KING             5000       5050
+TURNER           1500       1550
+ADAMS            1100       1150
+JAMES             950       1000
+FORD             3000       3050
+MILLER           1300       1350
+
+14 rows selected.
+
+SQL> SELECT ENAME,(SAL*12*40
+  2  
+SQL> 
+SQL> EDIT
+Wrote file afiedt.buf
+
+  1* SELECT ENAME,(SAL*12*10)/100
+  2  /
+SELECT ENAME,(SAL*12*10)/100
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> SELECT ENAME,SAL*12,(SAL*10)/100
+  2  FROM EMP;
+
+ENAME          SAL*12 (SAL*10)/100
+---------- ---------- ------------
+SMITH            9600           80
+ALLEN           19200          160
+WARD            15000          125
+JONES           35700        297.5
+MARTIN          15000          125
+BLAKE           34200          285
+CLARK           29400          245
+SCOTT           36000          300
+KING            60000          500
+TURNER          18000          150
+ADAMS           13200          110
+JAMES           11400           95
+FORD            36000          300
+MILLER          15600          130
+
+14 rows selected.
+
+SQL> SELECT EMP.*,(SAL*12)
+  2  FROM EMP;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO   (SAL*12)
+---------- ---------- --------- ---------- --------- ---------- ---------- ---------- ----------
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20       9600
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30      19200
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30      15000
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20      35700
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30      15000
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30      34200
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10      29400
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20      36000
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10      60000
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30      18000
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20      13200
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30      11400
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20      36000
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10      15600
+
+14 rows selected.
+
+SQL> SELECT ENAME,CLEARK,(SAL-100)
+  2  FROM EMP;
+SELECT ENAME,CLEARK,(SAL-100)
+             *
+ERROR at line 1:
+ORA-00904: "CLEARK": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,CLERK,(SAL-100)
+  2* FROM EMP
+SQL> /
+SELECT ENAME,CLERK,(SAL-100)
+             *
+ERROR at line 1:
+ORA-00904: "CLERK": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME,JOB,(SAL-100)
+  2* FROM EMP
+SQL> /
+
+ENAME      JOB        (SAL-100)
+---------- --------- ----------
+SMITH      CLERK            700
+ALLEN      SALESMAN        1500
+WARD       SALESMAN        1150
+JONES      MANAGER         2875
+MARTIN     SALESMAN        1150
+BLAKE      MANAGER         2750
+CLARK      MANAGER         2350
+SCOTT      ANALYST         2900
+KING       PRESIDENT       4900
+TURNER     SALESMAN        1400
+ADAMS      CLERK           1000
+JAMES      CLERK            850
+FORD       ANALYST         2900
+MILLER     CLERK           1200
+
+14 rows selected.

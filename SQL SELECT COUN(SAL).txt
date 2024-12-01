@@ -1,0 +1,298 @@
+SQL> SELECT COUN(SAL)
+  2  FROM EMP
+  3  WHERE DEPTNO = 10;
+SELECT COUN(SAL)
+       *
+ERROR at line 1:
+ORA-00904: "COUN": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(SAL-2000)
+  2  FROM EMP
+  3* WHERE DEPTNO = 10
+SQL> /
+
+COUNT(SAL-2000)
+---------------
+              3
+
+SQL> SELECT COUNT(SAL)
+  2  FROM EMP
+  3  WHERE JOB = 'CLERK';
+
+COUNT(SAL)
+----------
+         4
+
+SQL> SELECT AVG(SAL)
+  2  FROM EMP 
+  3  
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT * AVG(SAL)
+  2* FROM EMP
+SQL> /
+SELECT * AVG(SAL)
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT AVG(SAL)
+  2* FROM EMP
+SQL> /
+
+  AVG(SAL)
+----------
+2073.21429
+
+SQL> SELECT COUNT(A)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A';
+SELECT COUNT(A)
+             *
+ERROR at line 1:
+ORA-00904: "A": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(ENAME)
+  2  FROM EMP
+  3* WHERE ENAME LIKE '%A'
+SQL> /
+
+COUNT(ENAME)
+------------
+           0
+
+SQL> SELECT COUNT(ENAME)
+  2  
+SQL> SELECT COUNT(JOB
+  2  
+SQL> SELECT COUNT(JOB)
+  2  FROM EMP
+  3  WHERE JOB =('CLERK','MANAGER');
+WHERE JOB =('CLERK','MANAGER')
+          *
+ERROR at line 3:
+ORA-01797: this operator must be followed by ANY or ALL
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(JOB)
+  2  FROM EMP
+  3* WHERE JOB IN ('CLERK','MANAGER')
+SQL> /
+
+COUNT(JOB)
+----------
+         7
+
+SQL> SELECT COUNT
+  2  
+SQL> SELECT COUNT(SAL)
+  2  FROM EMP
+  3  WHERE HIREDATE = '1-FEB-81';
+
+COUNT(SAL)
+----------
+         0
+
+SQL> SELECT COUNT(COMM)
+  2  FROM EMP
+  3  WHERE DEPTNO =30;
+
+COUNT(COMM)
+-----------
+          4
+
+SQL> SELECT SELECT AVG(SAL),SUM(SAL),COUNT(SAL),MAX(SAL)
+  2  FROM EMP
+  3  WHERE JOB ='MANAGER';
+SELECT SELECT AVG(SAL),SUM(SAL),COUNT(SAL),MAX(SAL)
+       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1   SELECT AVG(SAL),SUM(SAL),COUNT(SAL),MAX(SAL)
+  2  FROM EMP
+  3* WHERE JOB ='MANAGER'
+SQL> /
+
+  AVG(SAL)   SUM(SAL) COUNT(SAL)   MAX(SAL)
+---------- ---------- ---------- ----------
+2758.33333       8275          3       2975
+
+SQL> SELECT COUNT(ENAME)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%A';
+
+COUNT(ENAME)
+------------
+           0
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(ENAME)
+  2  FROM EMP
+  3* WHERE ENAME LIKE 'A%'
+SQL> /
+
+COUNT(ENAME)
+------------
+           2
+
+SQL> SELECT COUNT(SAL),SUM(SAL)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%L%L%';
+
+COUNT(SAL)   SUM(SAL)
+---------- ----------
+         2       2900
+
+SQL> SELECT COUNT(DEPT)
+  2  FROM EMP;
+SELECT COUNT(DEPT)
+             *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(DEPT)
+  2* FROM EMP
+SQL> /
+SELECT COUNT(DEPT)
+             *
+ERROR at line 1:
+ORA-00904: "DEPT": invalid identifier
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SELECT COUNT('DEPT')
+  2* FROM EMP
+SQL> /
+
+COUNT('DEPT')
+-------------
+           14
+
+SQL> SELECT COUNT
+  2  
+SQL> SELECT COUNT(EANME)
+  2  FROM EMP
+  3  WHERE ENAME LIKE '%Z';
+SELECT COUNT(EANME)
+             *
+ERROR at line 1:
+ORA-00904: "EANME": invalid identifier
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT COUNT(ENAME)
+  2  FROM EMP
+  3* WHERE ENAME LIKE '%Z'
+SQL> /
+
+COUNT(ENAME)
+------------
+           0
+
+SQL> SELECT COUNT(ENAME)
+  2  FROM EMP
+  3  WHERE ENAME LIKE'%&';
+
+COUNT(ENAME)
+------------
+           0
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB = 30 OR JOB IN ('CLERK');
+WHERE JOB = 30 OR JOB IN ('CLERK')
+      *
+ERROR at line 3:
+ORA-01722: invalid number
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT SUM(SAL)
+  2  FROM EMP
+  3* WHERE JOB = 30 OR JOB ='CLERK'
+SQL> /
+WHERE JOB = 30 OR JOB ='CLERK'
+      *
+ERROR at line 3:
+ORA-01722: invalid number
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT SUM(SAL)
+  2  FROM EMP
+  3* WHERE DEPTNO = 30 OR JOB ='CLERK'
+SQL> /
+
+  SUM(SAL)
+----------
+     12600
+
+SQL> SELECT SUM(SAL)
+  2  FROM EMP
+  3  WHERE JOB ='ANALYST';
+
+  SUM(SAL)
+----------
+      6000
+
+SQL> SELECT DISTINCT COUNT(SAL)
+  2  FROM EMP
+  3  ;
+
+COUNT(SAL)
+----------
+        14
+
+SQL> SELECT COUNT(JOB)
+  2  FROM EMP
+  3  ;
+
+COUNT(JOB)
+----------
+        14
+
+SQL> SELECT AVG(JOB)
+  2  FROM EMP
+  3  WHERE JOB = 'CLERK';
+SELECT AVG(JOB)
+           *
+ERROR at line 1:
+ORA-01722: invalid number
+
+
+SQL> 

@@ -1,0 +1,235 @@
+SQL> --WAQTD SMITHS REPORTING MANAGER'S NAME--
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE EMPNO=(SELECR MGR
+  4               FROM EMP
+  5               WHERE ENAME='SMITH');
+WHERE EMPNO=(SELECR MGR
+                    *
+ERROR at line 3:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE EMPNO=(SELECT MGR
+  4               FROM EMP
+  5*              WHERE ENAME='SMITH')
+SQL> /
+
+ENAME                                                                           
+----------                                                                      
+FORD                                                                            
+
+SQL> --72.WAQTD ADAMS MANAGER'S MANAGER NAME --
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE EMPNO =(SELECT MGR
+  4               FROM EMP
+  5               WHERE EMPNO=(SELECT MGR
+  6                            FROM EMP
+  7                             WHERE ENAME='ADAMS'));
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+
+SQL> --WAQTD MILLER'S MANAGER'S SALARY --
+SQL> SELECT SAL
+  2  FROME EMP
+  3  WHERE EMPNO=(SELECT MGR
+  4               FROM EMP
+  5               WHERE ENAME ='MILLER');
+FROME EMP
+      *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT SAL
+  2  FROM EMP
+  3  WHERE EMPNO=(SELECT MGR
+  4               FROM EMP
+  5*              WHERE ENAME ='MILLER')
+SQL> /
+
+       SAL                                                                      
+----------                                                                      
+      2450                                                                      
+
+SQL> --WAQTD LOC OF SMITH'S MANAGER'S MANAGER--
+SQL> SELECT LOC
+  2  FROM EMP
+  3  WHERE DEPTNO IN (SELECT DEPTNO
+  4                   FROM EMP
+  5                   WHERE EMPNO =(SELECT MGR
+  6                                 FROM EMP
+  7                                 WHERE EMPNO
+  8                                 = (SELECT MGR
+  9                                    FROM EMP
+ 10                                    WHERE ENAME='SMITH')));
+SELECT LOC
+       *
+ERROR at line 1:
+ORA-00904: "LOC": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT LOC
+  2  FROM DEPT
+  3  WHERE DEPTNO IN (SELECT DEPTNO
+  4                   FROM EMP
+  5                   WHERE EMPNO =(SELECT MGR
+  6                                 FROM EMP
+  7                                 WHERE EMPNO = (SELECT MGR
+  8                                                 FROM EMP
+  9*                                                 WHERE ENAME='SMITH')))
+SQL> /
+
+LOC                                                                             
+-------------                                                                   
+DALLAS                                                                          
+
+SQL> --WAQTD NAME OF THE EMPLOYEES REPORTING TO BLAKE--
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE MGR=(SELECT EMPNO
+  4             FROM EMP
+  5             WHERE ENAME ='BLAKE');
+
+ENAME                                                                           
+----------                                                                      
+ALLEN                                                                           
+WARD                                                                            
+MARTIN                                                                          
+TURNER                                                                          
+JAMES                                                                           
+
+SQL> --WAQTD NUMBER OF EMPLPOYEES REPORTING TO KING--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE MGR =(SELECT EMPNO
+  4             FROM EMP
+  5             WHERE ENAME ='KING');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         3                                                                      
+
+SQL> --
+SQL> 78.WAQTD DETAILS OF THE EMPLOYEES RE EPORTING TO JONES
+SP2-0734: unknown command beginning "78.WAQTD D..." - rest of line ignored.
+SQL> SELECT *
+  2  FROM EMP
+  3  WHERE MGR=(SELECT EMPNO
+  4            FROM EMP
+  5            WHERE ENAME ='JONES');
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                 
+        20                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+
+SQL> --WAQTD ENAMES OF THE EMPLOYEES REPORTING TO BLAKE'S MANAGER--
+SQL> SELECT ENAME
+  2  FORM EMP
+  3  WHERE MGE=(SELECT EMPNO
+  4              FROM EMP
+  5              WHERE EMPNO=(SELECT MGR
+  6                           FROM EMP
+  7                           WHERE ENAME ='BLAKE'));
+FORM EMP
+     *
+ERROR at line 2:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE MGE=(SELECT EMPNO
+  4              FROM EMP
+  5              WHERE EMPNO=(SELECT MGR
+  6                           FROM EMP
+  7*                          WHERE ENAME ='BLAKE'))
+SQL> /
+WHERE MGE=(SELECT EMPNO
+      *
+ERROR at line 3:
+ORA-00904: "MGE": invalid identifier 
+
+
+SQL> ED
+Wrote file afiedt.buf
+
+  1  SELECT ENAME
+  2  FROM EMP
+  3  WHERE MGR=(SELECT EMPNO
+  4              FROM EMP
+  5              WHERE EMPNO=(SELECT MGR
+  6                           FROM EMP
+  7*                          WHERE ENAME ='BLAKE'))
+SQL> /
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+BLAKE                                                                           
+CLARK                                                                           
+
+SQL> --2 TRIKA--
+SQL> SELECT EMP
+  2  
+SQL> SELECT ENAME
+  2  FROM EMP
+  3  WHERE MGR=(SELECT MGR
+  4             FROM EMP
+  5             WHERE ENAME='BLAKE');
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+BLAKE                                                                           
+CLARK                                                                           
+
+SQL> --WAQTD NUMBER OF EMPLOYEES REPORTING TO FORD'S MANAGER --
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE MGR=(SELECT EMPNO
+  4             FROM EMP
+  5             WHERE EMPNO=(SELECT MGR
+  6                          FROM EMP
+  7                          WHERE ENAME='FORD'));
+
+  COUNT(*)                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> --2 TARIKA--
+SQL> SELECT COUNT(*)
+  2  FROM EMP
+  3  WHERE MGR=(SELECT MGR
+  4            FROM EMP
+  5            WHERE ENAME ='FORD');
+
+  COUNT(*)                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> SPOOL OFF
